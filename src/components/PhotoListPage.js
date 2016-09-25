@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 const PhotoListPage = props => {
 	const listItems = props.photos.map(photo => (

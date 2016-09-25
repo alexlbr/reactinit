@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class PhotoDetailPage extends Component {
-  render() {
-    return (
-      <h1>
-        Photo detail page
-      </h1>
-    );
-  }
+const PhotoDetailPage = ({photo}) => {
+  return (
+    <div>
+      <h1>{photo.title}</h1>
+      <img src={photo.url}  role="presentation"/>
+    </div>
+  );
 }
 
 export default PhotoDetailPage;

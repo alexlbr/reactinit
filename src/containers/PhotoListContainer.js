@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PhotoListPage from '../components/PhotoListPage'
-
+import * as api from '../api/photos'
 class PhotoListContainer extends Component {
 
 	constructor() {
@@ -10,20 +10,15 @@ class PhotoListContainer extends Component {
 	}
 
 	showPhotoDetail(photo) {
-		console.log('HAPPENS');
 		this.context.router.push(`/photos/${photo.id}`);
 	}
 
 	componentDidMount() {
-		fetch('http://jsonplaceholder.typicode.com/photos', {
-			method: 'get'
-		}).then((response) => {
-			return response.json()
-		}).then((data) => {
-			this.setState({photos: data.slice(0,10)})
-		}).catch((error) => {
-			console.log(error)
-		})
+		api.getPhotos().then( data => {
+	    this.setState({photos: data.slice(0,10)})
+	  }).catch( error => {
+	    console.log(error)
+	  })
 	}
 
 	render() {
