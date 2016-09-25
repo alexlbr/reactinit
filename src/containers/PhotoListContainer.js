@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import PhotoListPage from '../components/PhotoListPage'
 import * as api from '../api/photos'
-import getPhotos from '../actions/photos';
+import * as actions from '../actions/photos';
+
 class PhotoListContainer extends Component {
 
 	constructor() {
@@ -37,7 +38,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = ({
-	fetchPhotos: getPhotos
+	fetchPhotos: actions.getPhotos
 });
 
 PhotoListContainer.contextTypes = {
