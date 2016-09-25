@@ -1,8 +1,8 @@
 import React from 'react';
 
 const PhotoListPage = props => {
-	const listItems = props.photos.map(photo => (
-		<li key={photo.id} onClick={props.showPhotoDetail.bind(this, photo)}>
+	const listItems = props.photos.map((photo,ix) => (
+		<li key={ix} onClick={props.showPhotoDetail.bind(this, photo)}>
 			<img role="presentation" src={photo.thumbnailUrl}/>
 		</li>
 	));

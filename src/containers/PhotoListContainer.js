@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 import PhotoListPage from '../components/PhotoListPage'
 import * as api from '../api/photos'
+import getPhotos from '../actions/photos';
 class PhotoListContainer extends Component {
 
 	constructor() {
@@ -13,9 +15,11 @@ class PhotoListContainer extends Component {
 		this.context.router.push(`/photos/${photo.id}`);
 	}
 
+	//
 	componentDidMount() {
 		api.getPhotos().then( data => {
-	    this.setState({photos: data.slice(0,10)})
+	    // this.setState({photos: data.slice(0,10)})
+			this.props.fetchPhotos(data.slice(0,10))
 	  }).catch( error => {
 	    console.log(error)
 	  })
@@ -23,14 +27,23 @@ class PhotoListContainer extends Component {
 
 	render() {
 		return (
-			<PhotoListPage photos={this.state.photos} showPhotoDetail={this.showPhotoDetail} />
+			<PhotoListPage photos={this.props.photos} showPhotoDetail={this.showPhotoDetail} />
 		);
 	}
 }
 
+const mapStateToProps = (state) => ({
+	photos: state
+});
+
+const mapDispatchToProps = ({
+	fetchPhotos: getPhotos
+});
 
 PhotoListContainer.contextTypes = {
 	router: React.PropTypes.object.isRequired
 };
 
-export default PhotoListContainer;
+export default connect(mapStateToProps,mapDispatchToProps)(PhotoListContainer);
+
+// export default PhotoListContainer;
